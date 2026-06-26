@@ -30,36 +30,36 @@ ArthaSetu has two entry points that converge into a shared pipeline:
 ```mermaid
 flowchart TD
     A[Customer opens chat] --> B{Record found in DB?}
-    B -- No --> C[Acquisition Agent<br/>New prospect, no history]
-    B -- Yes --> D[Adoption Agent<br/>Existing customer, has history]
+    B -->|No| C[Acquisition Agent: new prospect]
+    B -->|Yes| D[Adoption Agent: existing customer]
 
     C --> C1[node_profession]
     C1 --> C2[node_income]
     C2 --> C3[node_education]
 
-    D --> D1[node_fetch_signals<br/>Login freq, UPI ratio, KYC]
+    D --> D1[node_fetch_signals]
     D1 --> D2{Signals clear?}
-    D2 -- Mixed --> D3[Ask one indirect question]
+    D2 -->|Mixed| D3[Ask one indirect question]
     D3 --> D2
 
     C3 --> E[node_classify]
-    D2 -- Clear --> E
+    D2 -->|Clear| E
 
     E --> E1{Vote on 3 signals}
-    E1 -- "3-0 agreement" --> E2[Hardcoded rule<br/>fast, no LLM cost]
-    E1 -- "2-1 conflict" --> E3[LLM reasoning call<br/>Llama3 weighs context]
+    E1 -->|3 to 0 agreement| E2[Hardcoded rule]
+    E1 -->|2 to 1 conflict| E3[LLM reasoning call]
 
     E2 --> F{customer_type}
     E3 --> F
 
-    F -- Type A: exposure gap --> G1[RAG query]
-    F -- Type B: convenience gap --> G2[RAG query]
+    F -->|Type A: exposure gap| G1[RAG query]
+    F -->|Type B: convenience gap| G2[RAG query]
 
-    G1 --> H1[LLM response<br/>Simple language, benefits + risks]
-    G2 --> H2[LLM response<br/>Pros/cons, let customer decide]
+    G1 --> H1[LLM response: simple language]
+    G2 --> H2[LLM response: pros and cons]
 
-    H1 --> I1[Guide next steps<br/>App setup, branch fallback]
-    H2 --> I2[Guide next steps<br/>Application steps, branch fallback]
+    H1 --> I1[Guide next steps]
+    H2 --> I2[Guide next steps]
 
     I1 --> J[Goal achieved]
     I2 --> J
