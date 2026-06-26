@@ -83,21 +83,22 @@ From there, both customer types go through the same RAG-grounded response pipeli
 - **LLM:** Llama3 via Ollama (local)
 - **Embeddings:** nomic-embed-text via Ollama (local)
 - **Vector store:** ChromaDB (persistent, local)
-- **Agent orchestration:** LangGraph (planned)
+- **Agent orchestration:** LangGraph (state-based graph, in progress)
 - **Language:** Python 3.12
 
 ## Current Progress
 
 - [x] Problem framing and architecture design
-- [x] RAG knowledge base — product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account
+- [x] RAG knowledge base — product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
 - [x] Section-wise chunking strategy (chunks split by `##` heading: overview, eligibility, rates, risks, how_to_apply)
 - [x] Ingestion pipeline (`agents/ingest.py`) — embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
-- [x] Retrieval test script (`agents/test_retrieval.py`)
-- [ ] More product documents (insurance, loans)
-- [ ] LangGraph state design and node implementation
-- [ ] Acquisition agent conversational flow
+- [x] Retrieval test script (`agents/test_retrieval.py`) — verified correct retrieval across products and sections
+- [x] LangGraph fundamentals validated with a minimal test graph (`agents/hello_langgraph.py`)
+- [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
+- [ ] More product documents (loans)
+- [ ] Hybrid rule + LLM classification logic (`node_classify`)
 - [ ] Adoption agent signal-fetching logic
-- [ ] Hybrid rule + LLM classification logic
+- [ ] Full graph wiring (acquisition + adoption paths converging into classification + RAG response)
 - [ ] End-to-end demo
 
 ## Project Structure
@@ -145,4 +146,4 @@ Product details (interest rates, eligibility criteria) used in this project are 
 
 ## Author
 
-Built by [Soumya](https://github.com/Soumya-205) — BTech CSE (Data Science), Manipal University Jaipur.# ArthaSetu
+Built by [Soumya](https://github.com/Soumya-205) — BTech CSE (Data Science), Manipal University Jaipur.
