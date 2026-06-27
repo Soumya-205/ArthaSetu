@@ -84,6 +84,7 @@ From there, both customer types go through the same RAG-grounded response pipeli
 - **Embeddings:** nomic-embed-text via Ollama (local)
 - **Vector store:** ChromaDB (persistent, local)
 - **Agent orchestration:** LangGraph (state-based graph, in progress)
+- **Classification logic:** Hybrid rule-based scoring + LLM fallback, with prompt-forced structured output (`FINAL ANSWER: A/B`) for reliable parsing
 - **Language:** Python 3.12
 
 ## Current Progress
@@ -95,11 +96,18 @@ From there, both customer types go through the same RAG-grounded response pipeli
 - [x] Retrieval test script (`agents/test_retrieval.py`) — verified correct retrieval across products and sections
 - [x] LangGraph fundamentals validated with a minimal test graph (`agents/hello_langgraph.py`)
 - [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
+- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
 - [ ] More product documents (loans)
-- [ ] Hybrid rule + LLM classification logic (`node_classify`)
+- [ ] Wire `node_classify` into the actual LangGraph graph (logic is built and tested standalone; not yet connected to a live Ollama LLM instance or the graph)
 - [ ] Adoption agent signal-fetching logic
 - [ ] Full graph wiring (acquisition + adoption paths converging into classification + RAG response)
 - [ ] End-to-end demo
+
+## Known Limitations
+
+- **Freshers / no established profession:** The current classification signals (profession, income, education) assume the customer has an established job and income. Students, recent graduates, or unemployed customers don't fit this cleanly — for example, a fresh engineering graduate with high education but little or no income doesn't map well onto the existing rules. A planned improvement is to detect this group during conversation and use a different signal set for them (e.g. field of study, or intended use of the account, instead of income).
+- **Profession coverage is necessarily incomplete:** The hardcoded profession lookup table only covers common professions. Anything not listed falls back to an LLM call to make the judgment — this keeps the system accurate for unusual professions, at the cost of an extra LLM call for those cases specifically.
+- **LLM response parsing:** Early versions of the LLM-based classification asked for a bare "A or B" answer and matched it exactly — this broke whenever the model added any extra words, punctuation, or reasoning before its answer, and silently defaulted to a fixed letter on failure (which could flip a correct answer to its opposite). The current version forces the LLM to end its response with an explicit `FINAL ANSWER: A` or `FINAL ANSWER: B` marker, which is parsed directly — this was specifically tested against responses that reason about each signal individually before concluding (e.g. "income and profession suggest B, but education suggests A — FINAL ANSWER: B") to confirm the right answer is extracted even when multiple letters appear earlier in the reasoning.
 
 ## Project Structure
 
