@@ -75,9 +75,10 @@ def node_classify(state: AcquisitionState)->dict:
 
     else:
         print(" [node_classify] conflicating signals, asking LLM to reason...")
-        customer_type=resolve_conflict_with_llm(
+        customer_type, reasoning=resolve_conflict_with_llm(
             state["profession"], state["income"], state["education"], llm
         )
+        print(f" [node_classify]LLM's fully reasoning:\n{reasoning}\n")
         print(f" [node_classify] LLM resolved condflict: Type {customer_type}")
     return {"customer_type": customer_type}
 

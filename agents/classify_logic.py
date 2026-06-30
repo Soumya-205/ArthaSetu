@@ -157,14 +157,15 @@ def resolve_conflict_with_llm(profession: str, income: int, education: str, llm)
         f"FINAL ANSWER: B"
     )
     response = llm.invoke(prompt)
-    answer = _extract_letter_answer(response.content)
+    full_reasoning=response.content
+    answer = _extract_letter_answer(full_reasoning)
 
     if answer == "unknown":
         # Only reached if the LLM's response contained neither letter at all -
         # a genuinely rare failure, unlike the old exact-match bug which
         # misfired on almost any normally-phrased response.
-        return "B"
-    return answer
+        return "B", full_reasoning
+    return answer, full_reasoning
 
 
 def tally_votes(income_vote: str, education_vote: str, profession_vote: str) -> dict:
