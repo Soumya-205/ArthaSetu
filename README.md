@@ -98,7 +98,7 @@ From there, both customer types go through the same RAG-grounded response pipeli
 - [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
 - [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
 - [ ] More product documents (loans)
-- [ ] Wire `node_classify` into the actual LangGraph graph (logic is built and tested standalone; not yet connected to a live Ollama LLM instance or the graph)
+- [x] Wire `node_classify` into the actual LangGraph graph (logic is built and tested standalone; not yet connected to a live Ollama LLM instance or the graph)
 - [ ] Adoption agent signal-fetching logic
 - [ ] Full graph wiring (acquisition + adoption paths converging into classification + RAG response)
 - [ ] End-to-end demo
