@@ -21,7 +21,7 @@ Low digital adoption isn't one problem - it's two different problems that look t
 
 Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them - adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
 
-Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly — the system never tags anyone as "rural" or "urban."
+Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly - the system never tags anyone as "rural" or "urban."
 
 ## Architecture Overview
 
@@ -74,22 +74,22 @@ Both paths feed into the same **classification core**:
 
 1. Each available signal is scored as leaning toward **Type A (exposure gap)** or **Type B (convenience gap)**.
 2. If the signals agree (e.g. 3-0), a fast hardcoded rule decides instantly.
-3. If the signals conflict (e.g. 2-1), an LLM call reasons over the context to make the call — handling edge cases a fixed rule would get wrong (e.g. a farmer with high income and strong education shouldn't be auto-classified as exposure-gap).
+3. If the signals conflict (e.g. 2-1), an LLM call reasons over the context to make the call - handling edge cases a fixed rule would get wrong (e.g. a farmer with high income and strong education shouldn't be auto-classified as exposure-gap).
 
-From there, both customer types go through the same RAG-grounded response pipeline — facts retrieved are identical for everyone; only the LLM's phrasing, tone, and emphasis differ based on customer type.
+From there, both customer types go through the same RAG-grounded response pipeline - facts retrieved are identical for everyone; only the LLM's phrasing, tone, and emphasis differ based on customer type.
 
 
 ## Demo
 
-Two runs of the Acquisition Agent showing the conditional routing in action — same profession (farmer), different income and education, completely different paths and responses.
+Two runs of the Acquisition Agent showing the conditional routing in action - same profession (farmer), different income and education, completely different paths and responses.
 
-**Type A — Exposure gap (farmer, ₹8,000/month, primary education)**
+**Type A - Exposure gap (farmer, ₹8,000/month, primary education)**
 
 Signals agree 3-0 → instant rule decision → broad retrieval → simple, benefits-first response with branch fallback.
 
 ![Type A demo](docs/type_A._demo.png)
 
-**Type B — Convenience gap (farmer, ₹50,000/month, postgraduate)**
+**Type B - Convenience gap (farmer, ₹50,000/month, postgraduate)**
 
 Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptional income → routes to Type B → asks customer what they want to know → targeted retrieval → comparative, analytical response.
 
@@ -173,4 +173,4 @@ Product details (interest rates, eligibility criteria) used in this project are 
 
 ## Author
 
-Built by [Soumya](https://github.com/Soumya-205) — BTech CSE (Data Science), Manipal University Jaipur.
+Built by [Soumya](https://github.com/Soumya-205) - BTech CSE (Data Science), Manipal University Jaipur.
