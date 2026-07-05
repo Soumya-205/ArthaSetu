@@ -145,17 +145,22 @@ def resolve_conflict_with_llm(profession: str, income: int, education: str, llm)
         f"- Profession: {profession}\n"
         f"- Monthly income: Rs.{income}\n"
         f"- Education level: {education}\n\n"
-        f"- Important context for income interpretation:\n"
+        f"Important context for income interpretation:\n"
         f"- The average monthly income for farmers in India is approximately Rs.10,000.\n"
-        f"- The average monthly income for daily wage workers in India is approximately Rs.8,000-12,000.\n"
-        f"- A montly income significantly above the typical range for a given profession"
-        f"suggests this is not a typical representative of that profession, and income/education"
+        f"- The average monthly income for daily wage laborers is approximately Rs.8,000-12,000.\n"
+        f"- A monthly income significantly above the typical range for a given profession "
+        f"suggests this is not a typical representative of that profession, and income/education "
         f"signals should be weighted more heavily in such cases.\n\n"
         f"Some signals about this customer may point in different directions. "
-        f"Reason about which classification fits better overall, considering whether "
-        f"that person's income is typical or exceptional for their profession, "
+        f"Reason about which classification fits better overall. Consider whether "
+        f"this person's income is typical or exceptional for their profession, "
         f"since an unusually high income relative to profession norms often signals "
         f"greater access to digital tools regardless of the profession category itself.\n\n"
+        f"IMPORTANT: Your FINAL ANSWER must be consistent with your own reasoning. "
+        f"If your reasoning leads you toward Type B (for example, because income is "
+        f"significantly above the profession average, or education strongly suggests "
+        f"digital comfort), then your FINAL ANSWER must be B — do not let the "
+        f"profession category alone override your own reasoning.\n\n"
         f"You may briefly explain your reasoning about each signal if needed, but "
         f"you MUST end your response with exactly this format on its own line, "
         f"stating your overall conclusion - not a per-signal breakdown:\n"
@@ -164,7 +169,7 @@ def resolve_conflict_with_llm(profession: str, income: int, education: str, llm)
         f"FINAL ANSWER: B"
     )
     response = llm.invoke(prompt)
-    full_reasoning=response.content
+    full_reasoning = response.content
     answer = _extract_letter_answer(full_reasoning)
 
     if answer == "unknown":
