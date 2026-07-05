@@ -2,7 +2,7 @@
 
 **Agentic AI for Banking Customer Acquisition & Digital Adoption**
 
-> 🚧 Work in progress — an ongoing personal project exploring agentic AI in banking.
+> 🚧 Work in progress - an ongoing personal project exploring agentic AI in banking.
 
 ---
 
@@ -10,16 +10,16 @@
 
 Banks face increasing challenges in acquiring customers at scale, driving adoption of digital products, and creating meaningful long-term engagement. Branch managers in particular juggle two competing responsibilities at once: bringing in brand-new customers, and getting existing customers to adopt digital products they haven't tried yet.
 
-ArthaSetu is an agentic AI system designed to assist with both — acquisition of new prospects, and adoption of digital products among existing customers — using a single underlying reasoning core.
+ArthaSetu is an agentic AI system designed to assist with both - acquisition of new prospects, and adoption of digital products among existing customers - using a single underlying reasoning core.
 
 ## Core Insight
 
-Low digital adoption isn't one problem — it's two different problems that look the same on the surface:
+Low digital adoption isn't one problem - it's two different problems that look the same on the surface:
 
-- **Exposure gap** — the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
-- **Convenience gap** — the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
+- **Exposure gap** - the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
+- **Convenience gap** - the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
 
-Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them — adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
+Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them - adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
 
 Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly — the system never tags anyone as "rural" or "urban."
 
@@ -65,10 +65,10 @@ flowchart TD
     I2 --> J
 ```
 
-Both entry points only differ in **how** the state gets filled — asking conversationally vs. fetching from existing records. Everything from `node_classify` onward is identical logic shared by both paths.
+Both entry points only differ in **how** the state gets filled - asking conversationally vs. fetching from existing records. Everything from `node_classify` onward is identical logic shared by both paths.
 
-- **Acquisition Agent** — for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet.
-- **Adoption Agent** — for existing customers. Fetches behavioral signals silently from existing data (login frequency, digital vs. branch transaction ratio, KYC-linked education/occupation).
+- **Acquisition Agent** - for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet.
+- **Adoption Agent** - for existing customers. Fetches behavioral signals silently from existing data (login frequency, digital vs. branch transaction ratio, KYC-linked education/occupation).
 
 Both paths feed into the same **classification core**:
 
@@ -95,7 +95,7 @@ Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptio
 
 ![Type B demo](docs/type_B._demo.png)
 
-The node names firing in sequence in the terminal show the agent making real routing decisions at runtime — not following a fixed script.
+The node names firing in sequence in the terminal show the agent making real routing decisions at runtime - not following a fixed script.
 
 ## Tech Stack (so far)
 
@@ -109,24 +109,24 @@ The node names firing in sequence in the terminal show the agent making real rou
 ## Current Progress
 
 - [x] Problem framing and architecture design
-- [x] RAG knowledge base — product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
+- [x] RAG knowledge base-product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
 - [x] Section-wise chunking strategy (chunks split by `##` heading: overview, eligibility, rates, risks, how_to_apply)
-- [x] Ingestion pipeline (`agents/ingest.py`) — embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
-- [x] Retrieval test script (`agents/test_retrieval.py`) — verified correct retrieval across products and sections
+- [x] Ingestion pipeline (`agents/ingest.py`)-embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
+- [x] Retrieval test script (`agents/test_retrieval.py`)-verified correct retrieval across products and sections
 - [x] LangGraph fundamentals validated with a minimal test graph (`agents/hello_langgraph.py`)
 - [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
-- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
+- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`)-signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
 - [ ] More product documents (loans)
-- [x] Wire `node_classify` into the actual LangGraph graph — connected to Ollama, tested with real LLM reasoning
+- [x] Wire `node_classify` into the actual LangGraph graph-connected to Ollama, tested with real LLM reasoning
 - [ ] Adoption agent signal-fetching logic
-- [x] Full Acquisition Agent graph wired end-to-end — conditional edges routing Type A vs Type B, RAG retrieval, personalized LLM response (`agents/acquisition_agent_v3.py`)
+- [x] Full Acquisition Agent graph wired end-to-end- conditional edges routing Type A vs Type B, RAG retrieval, personalized LLM response (`agents/acquisition_agent_v3.py`)
 - [ ] End-to-end demo
 
 ## Known Limitations
 
-- **Freshers / no established profession:** The current classification signals (profession, income, education) assume the customer has an established job and income. Students, recent graduates, or unemployed customers don't fit this cleanly — for example, a fresh engineering graduate with high education but little or no income doesn't map well onto the existing rules. A planned improvement is to detect this group during conversation and use a different signal set for them (e.g. field of study, or intended use of the account, instead of income).
-- **Profession coverage is necessarily incomplete:** The hardcoded profession lookup table only covers common professions. Anything not listed falls back to an LLM call to make the judgment — this keeps the system accurate for unusual professions, at the cost of an extra LLM call for those cases specifically.
-- **LLM response parsing:** Early versions of the LLM-based classification asked for a bare "A or B" answer and matched it exactly — this broke whenever the model added any extra words, punctuation, or reasoning before its answer, and silently defaulted to a fixed letter on failure (which could flip a correct answer to its opposite). The current version forces the LLM to end its response with an explicit `FINAL ANSWER: A` or `FINAL ANSWER: B` marker, which is parsed directly — this was specifically tested against responses that reason about each signal individually before concluding (e.g. "income and profession suggest B, but education suggests A — FINAL ANSWER: B") to confirm the right answer is extracted even when multiple letters appear earlier in the reasoning.
+- **Freshers / no established profession:** The current classification signals (profession, income, education) assume the customer has an established job and income. Students, recent graduates, or unemployed customers don't fit this cleanly-for example, a fresh engineering graduate with high education but little or no income doesn't map well onto the existing rules. A planned improvement is to detect this group during conversation and use a different signal set for them (e.g. field of study, or intended use of the account, instead of income).
+- **Profession coverage is necessarily incomplete:** The hardcoded profession lookup table only covers common professions. Anything not listed falls back to an LLM call to make the judgment-this keeps the system accurate for unusual professions, at the cost of an extra LLM call for those cases specifically.
+- **LLM response parsing:** Early versions of the LLM-based classification asked for a bare "A or B" answer and matched it exactly — this broke whenever the model added any extra words, punctuation, or reasoning before its answer, and silently defaulted to a fixed letter on failure (which could flip a correct answer to its opposite). The current version forces the LLM to end its response with an explicit `FINAL ANSWER: A` or `FINAL ANSWER: B` marker, which is parsed directly- this was specifically tested against responses that reason about each signal individually before concluding (e.g. "income and profession suggest B, but education suggests A - FINAL ANSWER: B") to confirm the right answer is extracted even when multiple letters appear earlier in the reasoning.
 
 ## Project Structure
 
