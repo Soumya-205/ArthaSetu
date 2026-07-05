@@ -87,13 +87,13 @@ Two runs of the Acquisition Agent showing the conditional routing in action — 
 
 Signals agree 3-0 → instant rule decision → broad retrieval → simple, benefits-first response with branch fallback.
 
-![Type A demo](docs/type_a_demo.png)
+![Type A demo](docs/type_A._demo.png)
 
 **Type B — Convenience gap (farmer, ₹50,000/month, postgraduate)**
 
 Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptional income → routes to Type B → asks customer what they want to know → targeted retrieval → comparative, analytical response.
 
-![Type B demo](docs/type_b_demo.png)
+![Type B demo](docs/type_B._demo.png)
 
 The node names firing in sequence in the terminal show the agent making real routing decisions at runtime — not following a fixed script.
 
