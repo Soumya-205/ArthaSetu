@@ -78,6 +78,25 @@ Both paths feed into the same **classification core**:
 
 From there, both customer types go through the same RAG-grounded response pipeline — facts retrieved are identical for everyone; only the LLM's phrasing, tone, and emphasis differ based on customer type.
 
+
+## Demo
+
+Two runs of the Acquisition Agent showing the conditional routing in action — same profession (farmer), different income and education, completely different paths and responses.
+
+**Type A — Exposure gap (farmer, ₹8,000/month, primary education)**
+
+Signals agree 3-0 → instant rule decision → broad retrieval → simple, benefits-first response with branch fallback.
+
+![Type A demo](docs/type_a_demo.png)
+
+**Type B — Convenience gap (farmer, ₹50,000/month, postgraduate)**
+
+Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptional income → routes to Type B → asks customer what they want to know → targeted retrieval → comparative, analytical response.
+
+![Type B demo](docs/type_b_demo.png)
+
+The node names firing in sequence in the terminal show the agent making real routing decisions at runtime — not following a fixed script.
+
 ## Tech Stack (so far)
 
 - **LLM:** Llama3 via Ollama (local)
@@ -98,9 +117,9 @@ From there, both customer types go through the same RAG-grounded response pipeli
 - [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
 - [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
 - [ ] More product documents (loans)
-- [x] Wire `node_classify` into the actual LangGraph graph (logic is built and tested standalone; connected to a live Ollama LLM instance or the graph)
+- [x] Wire `node_classify` into the actual LangGraph graph — connected to Ollama, tested with real LLM reasoning
 - [ ] Adoption agent signal-fetching logic
-- [ ] Full graph wiring (acquisition + adoption paths converging into classification + RAG response)
+- [x] Full Acquisition Agent graph wired end-to-end — conditional edges routing Type A vs Type B, RAG retrieval, personalized LLM response (`agents/acquisition_agent_v3.py`)
 - [ ] End-to-end demo
 
 ## Known Limitations
