@@ -231,3 +231,35 @@ if __name__ == "__main__":
     i, e, p = score_income(40000), score_education("undergraduate"), score_profession("astronaut")
     print(f"  income={i}, education={e}, profession={p}")
     print(f"  Tally: {tally_votes(i, e, p)}\n")
+
+# ── Adoption Agent scoring functions ─────────────────────────────────────────
+
+def score_login_frequency(weekly_logins: int) -> str:
+    """Below 1 login/week leans exposure gap (A); 1+ leans convenience gap (B)."""
+    if weekly_logins < 1:
+        return "A"
+    return "B"
+
+
+def score_digital_ratio(ratio: float) -> str:
+    """Below 0.3 leans exposure gap (A); 0.3+ leans convenience gap (B)."""
+    if ratio < 0.3:
+        return "A"
+    return "B"
+
+
+def tally_votes_adoption(votes: list[str]) -> dict:
+    """
+    Tally for Adoption Agent - 5 signals, stricter threshold.
+    4 or 5 agreeing = clear rule decision.
+    3-2 or worse = LLM needed.
+    """
+    known_votes = [v for v in votes if v != "unknown"]
+    count_a = known_votes.count("A")
+    count_b = known_votes.count("B")
+
+    if count_a >= 4 or count_b >= 4:
+        decision = "A" if count_a >= 4 else "B"
+        return {"outcome": "clear", "decision": decision, "votes": known_votes}
+
+    return {"outcome": "conflict", "decision": None, "votes": known_votes}
