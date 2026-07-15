@@ -1,4 +1,5 @@
 # ArthaSetu
+### अर्थसेतु — a bridge to financial access
 
 **Agentic AI for Banking Customer Acquisition & Digital Adoption**
 
