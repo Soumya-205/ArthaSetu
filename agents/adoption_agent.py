@@ -28,6 +28,7 @@ from classify_logic import (
     score_digital_ratio,
     tally_votes_adoption,
     resolve_conflict_with_llm,
+    resolve_conflict_with_llm_adoption,  
 )
 
 # Constants
@@ -53,7 +54,7 @@ class AdoptionState(TypedDict):
 
 
 # Shared connections
-llm = ChatOllama(model="llama3")
+llm = ChatOllama(model="mistral")
 embeddings = OllamaEmbeddings(model="nomic-embed-text")
 chroma_client = chromadb.PersistentClient(path=CHROMA_DB_DIR)
 collection = chroma_client.get_collection(COLLECTION_NAME)
@@ -146,8 +147,9 @@ def node_classify(state: AdoptionState) -> dict:
         print(f"  [node_classify] rule decision: Type {customer_type}")
     else:
         print("  [node_classify] conflict — asking LLM to reason...")
-        customer_type, reasoning = resolve_conflict_with_llm(
-            state["profession"], state["monthly_income"], state["education"], llm
+        customer_type, reasoning = resolve_conflict_with_llm_adoption(
+            state["profession"], state["monthly_income"], state["education"],
+            state["weekly_login_frequency"], state["digital_transaction_ratio"], llm
         )
         print(f"  [node_classify] LLM reasoning:\n{reasoning}\n")
         print(f"  [node_classify] LLM decision: Type {customer_type}")

@@ -263,3 +263,48 @@ def tally_votes_adoption(votes: list[str]) -> dict:
         return {"outcome": "clear", "decision": decision, "votes": known_votes}
 
     return {"outcome": "conflict", "decision": None, "votes": known_votes}
+
+def resolve_conflict_with_llm_adoption(
+    profession: str, income: int, education: str,
+    weekly_logins: int, digital_ratio: float, llm
+) -> tuple:
+    """
+    Conflict resolution for the Adoption Agent — extends resolve_conflict_with_llm
+    by also passing behavioral signals (login frequency, digital transaction ratio)
+    to the LLM. These are the strongest evidence of actual digital comfort and
+    should not be ignored when resolving conflicts for existing customers.
+    """
+    prompt = (
+        f"A bank is classifying an existing customer as either:\n"
+        f"Type A (exposure gap - limited exposure to digital banking tools), or\n"
+        f"Type B (convenience gap - aware of digital tools, just not motivated to use them).\n\n"
+        f"Customer profile signals:\n"
+        f"- Profession: {profession}\n"
+        f"- Monthly income: Rs.{income}\n"
+        f"- Education level: {education}\n\n"
+        f"Behavioral signals (from actual account usage):\n"
+        f"- Weekly login frequency: {weekly_logins} times/week\n"
+        f"- Digital transaction ratio: {digital_ratio:.0%} of transactions done digitally\n\n"
+        f"Important context:\n"
+        f"- The average monthly income for farmers in India is approximately Rs.10,000.\n"
+        f"- In India, 60% of consumer spending is still cash-based, so a digital ratio "
+        f"below 30% is meaningful evidence of low digital engagement.\n"
+        f"- Behavioral signals (login frequency, digital ratio) reflect ACTUAL usage "
+        f"and should be weighted heavily — they are stronger evidence than profile "
+        f"signals alone, since a person may have a high income or education but still "
+        f"not actually use digital banking in practice.\n\n"
+        f"IMPORTANT: Your FINAL ANSWER must be consistent with your own reasoning. "
+        f"If behavioral signals strongly suggest low digital usage (e.g. zero logins, "
+        f"very low digital ratio), lean toward Type A even if profile signals suggest B.\n\n"
+        f"You may briefly explain your reasoning, but you MUST end with:\n"
+        f"FINAL ANSWER: A\n"
+        f"or\n"
+        f"FINAL ANSWER: B"
+    )
+    response = llm.invoke(prompt)
+    full_reasoning = response.content
+    answer = _extract_letter_answer(full_reasoning)
+
+    if answer == "unknown":
+        return "A", full_reasoning
+    return answer, full_reasoning

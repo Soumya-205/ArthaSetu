@@ -43,7 +43,7 @@ class AcquisitionState(TypedDict):
 
 
 # Shared connections
-llm = ChatOllama(model="llama3")
+llm = ChatOllama(model="mistral")
 embeddings = OllamaEmbeddings(model="nomic-embed-text")
 chroma_client = chromadb.PersistentClient(path=CHROMA_DB_DIR)
 collection = chroma_client.get_collection(COLLECTION_NAME)

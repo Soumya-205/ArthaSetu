@@ -1,6 +1,8 @@
 # ArthaSetu
 
-> 🚧 Work in progress - an ongoing personal project exploring agentic AI in banking.
+**Agentic AI for Banking Customer Acquisition & Digital Adoption**
+
+> 🚧 Work in progress — an ongoing personal project exploring agentic AI in banking.
 
 ---
 
@@ -8,18 +10,18 @@
 
 Banks face increasing challenges in acquiring customers at scale, driving adoption of digital products, and creating meaningful long-term engagement. Branch managers in particular juggle two competing responsibilities at once: bringing in brand-new customers, and getting existing customers to adopt digital products they haven't tried yet.
 
-ArthaSetu is an agentic AI system designed to assist with both - acquisition of new prospects, and adoption of digital products among existing customers - using a single underlying reasoning core.
+ArthaSetu is an agentic AI system designed to assist with both — acquisition of new prospects, and adoption of digital products among existing customers — using a single underlying reasoning core.
 
 ## Core Insight
 
-Low digital adoption isn't one problem - it's two different problems that look the same on the surface:
+Low digital adoption isn't one problem — it's two different problems that look the same on the surface:
 
-- **Exposure gap** - the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
-- **Convenience gap** - the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
+- **Exposure gap** — the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
+- **Convenience gap** — the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
 
-Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them - adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
+Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them — adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
 
-Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly - the system never tags anyone as "rural" or "urban."
+Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly — the system never tags anyone as "rural" or "urban."
 
 ## Architecture Overview
 
@@ -43,9 +45,9 @@ flowchart TD
     C3 --> E[node_classify]
     D2 -->|Clear| E
 
-    E --> E1{Vote on 3 signals}
-    E1 -->|3 to 0 agreement| E2[Hardcoded rule]
-    E1 -->|2 to 1 conflict| E3[LLM reasoning call]
+    E --> E1{Vote on signals}
+    E1 -->|Clear majority| E2[Hardcoded rule]
+    E1 -->|Conflict| E3[LLM reasoning call]
 
     E2 --> F{customer_type}
     E3 --> F
@@ -63,78 +65,104 @@ flowchart TD
     I2 --> J
 ```
 
-Both entry points only differ in **how** the state gets filled - asking conversationally vs. fetching from existing records. Everything from `node_classify` onward is identical logic shared by both paths.
+- **Acquisition Agent** — for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet. Uses a 3-signal voting system (3-0 clear → rule, 2-1 conflict → LLM).
+- **Adoption Agent** — for existing customers. Fetches behavioral signals silently from SQLite (login frequency, digital transaction ratio, KYC-linked education/occupation). Uses a stricter 5-signal voting system (4-of-5 clear → rule, 3-2 or worse → LLM).
 
-- **Acquisition Agent** - for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet.
-- **Adoption Agent** - for existing customers. Fetches behavioral signals silently from existing data (login frequency, digital vs. branch transaction ratio, KYC-linked education/occupation).
+Both paths feed into the same **classification core**, and the conflict-resolution LLM prompt for the Adoption Agent explicitly includes behavioral signals — giving actual usage patterns priority over profile signals alone.
 
-Both paths feed into the same **classification core**:
+## Acquisition Agent Demo
 
-1. Each available signal is scored as leaning toward **Type A (exposure gap)** or **Type B (convenience gap)**.
-2. If the signals agree (e.g. 3-0), a fast hardcoded rule decides instantly.
-3. If the signals conflict (e.g. 2-1), an LLM call reasons over the context to make the call - handling edge cases a fixed rule would get wrong (e.g. a farmer with high income and strong education shouldn't be auto-classified as exposure-gap).
+Two runs showing the conditional routing in action — same profession (farmer), different income and education, completely different paths and responses.
 
-From there, both customer types go through the same RAG-grounded response pipeline - facts retrieved are identical for everyone; only the LLM's phrasing, tone, and emphasis differ based on customer type.
+**Type A — Exposure gap (farmer, ₹8,000/month, primary education)**
 
+Signals agree 3-0 → instant rule decision, no LLM call → broad retrieval → simple, benefits-first response with branch fallback.
 
-## Demo
+![Acquisition Type A demo](docs/type_A._demo.png)
 
-Two runs of the Acquisition Agent showing the conditional routing in action - same profession (farmer), different income and education, completely different paths and responses.
-
-**Type A - Exposure gap (farmer, ₹8,000/month, primary education)**
-
-Signals agree 3-0 → instant rule decision → broad retrieval → simple, benefits-first response with branch fallback.
-
-![Type A demo](docs/type_A._demo.png)
-
-**Type B - Convenience gap (farmer, ₹50,000/month, postgraduate)**
+**Type B — Convenience gap (farmer, ₹50,000/month, postgraduate)**
 
 Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptional income → routes to Type B → asks customer what they want to know → targeted retrieval → comparative, analytical response.
 
-![Type B demo](docs/type_B._demo.png)
+![Acquisition Type B demo](docs/type_B._demo.png)
 
-The node names firing in sequence in the terminal show the agent making real routing decisions at runtime - not following a fixed script.
+## Adoption Agent Demo
 
-## Tech Stack (so far)
+Three runs showing the Adoption Agent silently fetching customer data from SQLite and routing accordingly — no conversational signal collection, everything comes from the database.
 
-- **LLM:** Llama3 via Ollama (local)
+**Run 1 — Clear Type A (Raju Singh, laborer, ₹8,000/month)**
+
+5-0 unanimous vote → instant rule decision, no LLM call → simple response with branch mention.
+
+![Adoption clear Type A](docs/demo_1.png)
+
+**Run 2 — Conflict resolved to Type A (Sunita Devi, teacher, ₹45,000/month)**
+
+3-2 split → LLM reasons with behavioral signals (0 logins/week, 5% digital ratio) → correctly classifies as Type A despite high income and education, because actual usage behavior is the stronger signal.
+
+![Adoption conflict Type A](docs/demo_2.png)
+
+**Run 3 — Clear Type B (Priya Sharma, software engineer, ₹85,000/month)**
+
+5-0 unanimous vote → agent asks what she wants to know → targeted retrieval → comparative, analytical response.
+
+![Adoption Type B](docs/demo_3.png)
+
+The node names firing in sequence in the terminal (`node_classify`, `node_retrieve_type_a` / `node_retrieve_type_b`, `node_respond`) show the agent making real routing decisions at runtime — not following a fixed script.
+
+## Tech Stack
+
+- **LLM:** Llama3 / Mistral via Ollama (local, no external API dependency)
 - **Embeddings:** nomic-embed-text via Ollama (local)
-- **Vector store:** ChromaDB (persistent, local)
-- **Agent orchestration:** LangGraph (state-based graph, in progress)
+- **Vector store:** ChromaDB (persistent, local) for RAG knowledge base
+- **Customer database:** SQLite with synthetic customer profiles
+- **Agent orchestration:** LangGraph (state-based graph with conditional edges)
 - **Classification logic:** Hybrid rule-based scoring + LLM fallback, with prompt-forced structured output (`FINAL ANSWER: A/B`) for reliable parsing
 - **Language:** Python 3.12
 
 ## Current Progress
 
 - [x] Problem framing and architecture design
-- [x] RAG knowledge base-product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
+- [x] RAG knowledge base — product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
 - [x] Section-wise chunking strategy (chunks split by `##` heading: overview, eligibility, rates, risks, how_to_apply)
-- [x] Ingestion pipeline (`agents/ingest.py`)-embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
-- [x] Retrieval test script (`agents/test_retrieval.py`)-verified correct retrieval across products and sections
+- [x] Ingestion pipeline (`agents/ingest.py`) — embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
+- [x] Retrieval test script (`agents/test_retrieval.py`) — verified correct retrieval across products and sections
 - [x] LangGraph fundamentals validated with a minimal test graph (`agents/hello_langgraph.py`)
-- [x] Acquisition agent conversational flow — first 3 nodes (`node_profession`, `node_income`, `node_education`) implemented and tested (`agents/acquisition_agent_v1.py`)
-- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`)-signal scoring (income, education, profession), vote tallying (3-0 clear vs 2-1 conflict), LLM fallback for unrecognized professions, and LLM-based conflict resolution for genuine disagreements. Tested against multiple real scenarios including the original high-income, educated farmer edge case.
-- [ ] More product documents (loans)
-- [x] Wire `node_classify` into the actual LangGraph graph-connected to Ollama, tested with real LLM reasoning
-- [ ] Adoption agent signal-fetching logic
-- [x] Full Acquisition Agent graph wired end-to-end- conditional edges routing Type A vs Type B, RAG retrieval, personalized LLM response (`agents/acquisition_agent_v3.py`)
-- [ ] End-to-end demo
+- [x] Acquisition Agent — full end-to-end graph with conversational signal collection, hybrid classification, conditional routing, RAG retrieval, and personalized response (`agents/acquisition_agent_v3.py`)
+- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — 3-signal and 5-signal voting, LLM fallback for unknown professions, conflict resolution with `FINAL ANSWER` structured output
+- [x] Adoption Agent — full end-to-end graph fetching signals silently from SQLite, 5-signal classification with behavioral signals, conditional routing, RAG retrieval, personalized response (`agents/adoption_agent.py`)
+- [x] Synthetic customer database (`data/customers.db`) — 7 profiles covering clear Type A, clear Type B, and ambiguous conflict cases
+- [ ] Loan product document for RAG knowledge base
+- [ ] Terminal streaming to visualize graph execution in real time
+- [ ] Final README and repo cleanup
 
 ## Known Limitations
 
-- **Freshers / no established profession:** The current classification signals (profession, income, education) assume the customer has an established job and income. Students, recent graduates, or unemployed customers don't fit this cleanly-for example, a fresh engineering graduate with high education but little or no income doesn't map well onto the existing rules. A planned improvement is to detect this group during conversation and use a different signal set for them (e.g. field of study, or intended use of the account, instead of income).
-- **Profession coverage is necessarily incomplete:** The hardcoded profession lookup table only covers common professions. Anything not listed falls back to an LLM call to make the judgment-this keeps the system accurate for unusual professions, at the cost of an extra LLM call for those cases specifically.
-- **LLM response parsing:** Early versions of the LLM-based classification asked for a bare "A or B" answer and matched it exactly — this broke whenever the model added any extra words, punctuation, or reasoning before its answer, and silently defaulted to a fixed letter on failure (which could flip a correct answer to its opposite). The current version forces the LLM to end its response with an explicit `FINAL ANSWER: A` or `FINAL ANSWER: B` marker, which is parsed directly- this was specifically tested against responses that reason about each signal individually before concluding (e.g. "income and profession suggest B, but education suggests A - FINAL ANSWER: B") to confirm the right answer is extracted even when multiple letters appear earlier in the reasoning.
+- **Freshers / no established profession:** The current classification signals (profession, income, education) assume the customer has an established job and income. Students, recent graduates, or unemployed customers don't fit this cleanly — a planned improvement is to detect this group during conversation and use a different signal set (e.g. field of study instead of income).
+- **Profession coverage is necessarily incomplete:** The hardcoded profession lookup table only covers common professions. Anything not listed falls back to an LLM call — this keeps the system accurate for unusual professions, at the cost of an extra LLM call for those cases.
+- **LLM response parsing:** Early versions asked for a bare "A or B" answer and matched it exactly — this broke whenever the model added extra words or reasoning, and silently defaulted to a fixed letter. The current version forces the LLM to end with an explicit `FINAL ANSWER: A` or `FINAL ANSWER: B` marker, tested against multi-signal reasoning responses to confirm the right answer is always extracted.
+- **Behavioral signals not yet passed to Acquisition Agent conflict resolution:** The Acquisition Agent's conflict resolver only sees profession, income, and education — it has no behavioral data since the customer is new. The Adoption Agent's resolver correctly includes login frequency and digital transaction ratio.
 
 ## Project Structure
 
 ```
 ArthaSetu/
-├── agents/              # Agent logic, graph nodes, ingestion & test scripts
+├── agents/
+│   ├── ingest.py                  # RAG ingestion pipeline
+│   ├── test_retrieval.py          # RAG retrieval verification
+│   ├── classify_logic.py          # Hybrid classification scoring + LLM functions
+│   ├── setup_db.py                # SQLite synthetic customer database setup
+│   ├── hello_langgraph.py         # Minimal LangGraph test
+│   ├── acquisition_agent_v1.py    # Acquisition: 3-node conversational chain
+│   ├── acquisition_agent_v2.py    # Acquisition: + classification node
+│   ├── acquisition_agent_v3.py    # Acquisition: full graph with RAG response
+│   └── adoption_agent.py          # Adoption: full graph with SQLite + RAG response
 ├── data/
-│   ├── products/        # RAG knowledge base - one .md file per banking product
-│   └── chroma_db/       # Persistent ChromaDB store (generated, not committed)
-├── notebooks/           # Exploration and experiments
+│   ├── products/                  # RAG knowledge base — one .md file per product
+│   ├── chroma_db/                 # Persistent ChromaDB store (generated, not committed)
+│   └── customers.db               # Synthetic SQLite customer database
+├── docs/                          # Demo screenshots
+├── notebooks/                     # Exploration and experiments
 ├── requirements.txt
 └── README.md
 ```
@@ -154,21 +182,27 @@ venv\Scripts\activate          # Windows
 # Install dependencies
 pip install -r requirements.txt
 
-# Pull required Ollama models
+# Pull required Ollama models (must have Ollama installed and running)
 ollama pull llama3
 ollama pull nomic-embed-text
 
-# Build the knowledge base
+# Build the RAG knowledge base
 python agents/ingest.py
 
-# Try retrieval
-python agents/test_retrieval.py
+# Set up the synthetic customer database
+python agents/setup_db.py
+
+# Run the Acquisition Agent
+python agents/acquisition_agent_v3.py
+
+# Run the Adoption Agent
+python agents/adoption_agent.py
 ```
 
 ## Note on Data
 
-Product details (interest rates, eligibility criteria) used in this project are **illustrative and synthetic**, modeled on real banking product categories but not scraped from any live source. They are not accurate, current rates for any real bank and should not be used for actual financial decisions.
+Product details (interest rates, eligibility criteria) used in this project are **illustrative and synthetic**, modeled on real banking product categories but not scraped from any live source. They are not accurate current rates for any real bank and should not be used for actual financial decisions. Customer profiles in the SQLite database are entirely fictional.
 
 ## Author
 
-Built by [Soumya](https://github.com/Soumya-205) - BTech CSE (Data Science), Manipal University Jaipur.
+Built by [Soumya](https://github.com/Soumya-205) — BTech CSE (Data Science), Manipal University Jaipur.
