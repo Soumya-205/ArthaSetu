@@ -94,13 +94,13 @@ Three runs showing the Adoption Agent silently fetching customer data from SQLit
 
 5-0 unanimous vote → instant rule decision, no LLM call → simple response with branch mention.
 
-![Adoption clear Type A](docs/demo_1.png)
+![Adoption clear Type A](docs/demo_2.png)
 
 **Run 2 — Conflict resolved to Type A (Sunita Devi, teacher, ₹45,000/month)**
 
 3-2 split → LLM reasons with behavioral signals (0 logins/week, 5% digital ratio) → correctly classifies as Type A despite high income and education, because actual usage behavior is the stronger signal.
 
-![Adoption conflict Type A](docs/demo_2.png)
+![Adoption conflict Type A](docs/demo_1.png)
 
 **Run 3 — Clear Type B (Priya Sharma, software engineer, ₹85,000/month)**
 
