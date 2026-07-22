@@ -2,7 +2,7 @@
 
 **Agentic AI for Banking Customer Acquisition & Digital Adoption**
 
-> 🚧 Work in progress — an ongoing personal project exploring agentic AI in banking.
+> 🚧 Work in progress - an ongoing personal project exploring agentic AI in banking.
 
 ---
 
@@ -10,18 +10,18 @@
 
 Banks face increasing challenges in acquiring customers at scale, driving adoption of digital products, and creating meaningful long-term engagement. Branch managers in particular juggle two competing responsibilities at once: bringing in brand-new customers, and getting existing customers to adopt digital products they haven't tried yet.
 
-ArthaSetu is an agentic AI system designed to assist with both — acquisition of new prospects, and adoption of digital products among existing customers — using a single underlying reasoning core.
+ArthaSetu is an agentic AI system designed to assist with both  acquisition of new prospects, and adoption of digital products among existing customers - using a single underlying reasoning core.
 
 ## Core Insight
 
-Low digital adoption isn't one problem — it's two different problems that look the same on the surface:
+Low digital adoption isn't one problem - it's two different problems that look the same on the surface:
 
-- **Exposure gap** — the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
-- **Convenience gap** — the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
+- **Exposure gap** - the customer hasn't had enough exposure to digital banking tools to feel comfortable using them (often, but not exclusively, more common in rural contexts with less digital infrastructure).
+- **Convenience gap** - the customer is aware of digital products but hasn't been sufficiently nudged or motivated to adopt them (often, but not exclusively, more common in urban contexts).
 
-Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them — adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
+Treating both groups the same way wastes effort. ArthaSetu's agent reasons about *which* gap a customer has before deciding *how* to engage them - adjusting tone, depth, and channel recommendations accordingly, rather than applying a one-size-fits-all script.
 
-Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly — the system never tags anyone as "rural" or "urban."
+Importantly, this classification is based on **behavioral and contextual signals** (digital engagement patterns, education, occupation), never on geography or demographic labels directly - the system never tags anyone as "rural" or "urban."
 
 ## Architecture Overview
 
@@ -65,22 +65,22 @@ flowchart TD
     I2 --> J
 ```
 
-- **Acquisition Agent** — for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet. Uses a 3-signal voting system (3-0 clear → rule, 2-1 conflict → LLM).
-- **Adoption Agent** — for existing customers. Fetches behavioral signals silently from SQLite (login frequency, digital transaction ratio, KYC-linked education/occupation). Uses a stricter 5-signal voting system (4-of-5 clear → rule, 3-2 or worse → LLM).
+- **Acquisition Agent** - for brand-new prospects with no existing bank relationship. Builds a profile conversationally (profession, income, education) since no account data exists yet. Uses a 3-signal voting system (3-0 clear → rule, 2-1 conflict → LLM).
+- **Adoption Agent** - for existing customers. Fetches behavioral signals silently from SQLite (login frequency, digital transaction ratio, KYC-linked education/occupation). Uses a stricter 5-signal voting system (4-of-5 clear → rule, 3-2 or worse → LLM).
 
-Both paths feed into the same **classification core**, and the conflict-resolution LLM prompt for the Adoption Agent explicitly includes behavioral signals — giving actual usage patterns priority over profile signals alone.
+Both paths feed into the same **classification core**, and the conflict-resolution LLM prompt for the Adoption Agent explicitly includes behavioral signals - giving actual usage patterns priority over profile signals alone.
 
 ## Acquisition Agent Demo
 
-Two runs showing the conditional routing in action — same profession (farmer), different income and education, completely different paths and responses.
+Two runs showing the conditional routing in action - same profession (farmer), different income and education, completely different paths and responses.
 
-**Type A — Exposure gap (farmer, ₹8,000/month, primary education)**
+**Type A - Exposure gap (farmer, ₹8,000/month, primary education)**
 
 Signals agree 3-0 → instant rule decision, no LLM call → broad retrieval → simple, benefits-first response with branch fallback.
 
 ![Acquisition Type A demo](docs/type_A._demo.png)
 
-**Type B — Convenience gap (farmer, ₹50,000/month, postgraduate)**
+**Type B - Convenience gap (farmer, ₹50,000/month, postgraduate)**
 
 Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptional income → routes to Type B → asks customer what they want to know → targeted retrieval → comparative, analytical response.
 
@@ -90,25 +90,25 @@ Signals conflict 2-1 → LLM reasons over context, correctly identifies exceptio
 
 Three runs showing the Adoption Agent silently fetching customer data from SQLite and routing accordingly — no conversational signal collection, everything comes from the database.
 
-**Run 1 — Clear Type A (Raju Singh, laborer, ₹8,000/month)**
+**Run 1 - Clear Type A (Raju Singh, laborer, ₹8,000/month)**
 
 5-0 unanimous vote → instant rule decision, no LLM call → simple response with branch mention.
 
 ![Adoption clear Type A](docs/demo_2.png)
 
-**Run 2 — Conflict resolved to Type A (Sunita Devi, teacher, ₹45,000/month)**
+**Run 2 - Conflict resolved to Type A (Sunita Devi, teacher, ₹45,000/month)**
 
 3-2 split → LLM reasons with behavioral signals (0 logins/week, 5% digital ratio) → correctly classifies as Type A despite high income and education, because actual usage behavior is the stronger signal.
 
 ![Adoption conflict Type A](docs/demo_1.png)
 
-**Run 3 — Clear Type B (Priya Sharma, software engineer, ₹85,000/month)**
+**Run 3 - Clear Type B (Priya Sharma, software engineer, ₹85,000/month)**
 
 5-0 unanimous vote → agent asks what she wants to know → targeted retrieval → comparative, analytical response.
 
 ![Adoption Type B](docs/demo_3.png)
 
-The node names firing in sequence in the terminal (`node_classify`, `node_retrieve_type_a` / `node_retrieve_type_b`, `node_respond`) show the agent making real routing decisions at runtime — not following a fixed script.
+The node names firing in sequence in the terminal (`node_classify`, `node_retrieve_type_a` / `node_retrieve_type_b`, `node_respond`) show the agent making real routing decisions at runtime - not following a fixed script.
 
 ## Tech Stack
 
@@ -123,15 +123,15 @@ The node names firing in sequence in the terminal (`node_classify`, `node_retrie
 ## Current Progress
 
 - [x] Problem framing and architecture design
-- [x] RAG knowledge base — product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
+- [x] RAG knowledge base - product documents (`data/products/`) for Fixed Deposit, Recurring Deposit, Savings Account, Life Insurance
 - [x] Section-wise chunking strategy (chunks split by `##` heading: overview, eligibility, rates, risks, how_to_apply)
-- [x] Ingestion pipeline (`agents/ingest.py`) — embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
-- [x] Retrieval test script (`agents/test_retrieval.py`) — verified correct retrieval across products and sections
+- [x] Ingestion pipeline (`agents/ingest.py`) - embeds and stores chunks in ChromaDB with `product_name` and `section_type` metadata
+- [x] Retrieval test script (`agents/test_retrieval.py`) - verified correct retrieval across products and sections
 - [x] LangGraph fundamentals validated with a minimal test graph (`agents/hello_langgraph.py`)
-- [x] Acquisition Agent — full end-to-end graph with conversational signal collection, hybrid classification, conditional routing, RAG retrieval, and personalized response (`agents/acquisition_agent_v3.py`)
-- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) — 3-signal and 5-signal voting, LLM fallback for unknown professions, conflict resolution with `FINAL ANSWER` structured output
-- [x] Adoption Agent — full end-to-end graph fetching signals silently from SQLite, 5-signal classification with behavioral signals, conditional routing, RAG retrieval, personalized response (`agents/adoption_agent.py`)
-- [x] Synthetic customer database (`data/customers.db`) — 7 profiles covering clear Type A, clear Type B, and ambiguous conflict cases
+- [x] Acquisition Agent - full end-to-end graph with conversational signal collection, hybrid classification, conditional routing, RAG retrieval, and personalized response (`agents/acquisition_agent_v3.py`)
+- [x] Hybrid rule + LLM classification logic (`agents/classify_logic.py`) - 3-signal and 5-signal voting, LLM fallback for unknown professions, conflict resolution with `FINAL ANSWER` structured output
+- [x] Adoption Agent - full end-to-end graph fetching signals silently from SQLite, 5-signal classification with behavioral signals, conditional routing, RAG retrieval, personalized response (`agents/adoption_agent.py`)
+- [x] Synthetic customer database (`data/customers.db`) - 7 profiles covering clear Type A, clear Type B, and ambiguous conflict cases
 - [ ] Loan product document for RAG knowledge base
 - [ ] Terminal streaming to visualize graph execution in real time
 - [ ] Final README and repo cleanup
