@@ -283,7 +283,11 @@ graph = graph_builder.compile()
 if __name__ == "__main__":
     print("--- ArthaSetu Adoption Agent ---\n")
 
-    final_state = graph.invoke({})
+    final_state = {}
+    for chunk in graph.stream({}, stream_mode="updates"):
+        for node_name, node_update in chunk.items():
+            print(f"\n-> Node fired: {node_name}")
+            final_state.update(node_update)
 
     if final_state.get("customer_found"):
         print("\n" + "="*60)

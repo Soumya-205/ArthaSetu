@@ -236,7 +236,11 @@ graph = graph_builder.compile()
 if __name__ == "__main__":
     print("--- ArthaSetu Acquisition Agent (v3, with RAG response) ---\n")
 
-    final_state = graph.invoke({})
+    final_state = {}
+    for chunk in graph.stream({}, stream_mode="updates"):
+        for node_name, node_update in chunk.itens():
+            print(f"\n-> Node fired: {node_name}")
+            final_state.update(node_update)
 
     print("\n" + "="*60)
     print("AGENT RESPONSE TO CUSTOMER:")
