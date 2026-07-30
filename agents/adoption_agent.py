@@ -286,7 +286,7 @@ if __name__ == "__main__":
     final_state = {}
     for chunk in graph.stream({}, stream_mode="updates"):
         for node_name, node_update in chunk.items():
-            print(f"\n-> Node fired: {node_name}")
+            print(f"\n⟶ Node fired: [{node_name}]")
             final_state.update(node_update)
 
     if final_state.get("customer_found"):
@@ -295,5 +295,5 @@ if __name__ == "__main__":
         print("="*60)
         print(final_state["final_response"])
         print("="*60)
-        print(f"\n[Debug] Customer: {final_state['name']} | Type: {final_state['customer_type']}")
+        print(f"\n[Debug] Customer: {final_state.get('name')} | Type: {final_state.get('customer_type')}")
         print(f"[Debug] Query used: {final_state.get('customer_query', 'N/A')}")

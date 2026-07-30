@@ -238,14 +238,15 @@ if __name__ == "__main__":
 
     final_state = {}
     for chunk in graph.stream({}, stream_mode="updates"):
-        for node_name, node_update in chunk.itens():
-            print(f"\n-> Node fired: {node_name}")
+        for node_name, node_update in chunk.items():
+            print(f"\n⟶ Node fired: [{node_name}]")
             final_state.update(node_update)
 
-    print("\n" + "="*60)
-    print("AGENT RESPONSE TO CUSTOMER:")
-    print("="*60)
-    print(final_state["final_response"])
-    print("="*60)
-    print(f"\n[Debug] Customer Type: {final_state['customer_type']}")
-    print(f"[Debug] Query used: {final_state['customer_query']}")
+    if final_state.get("final_response"):
+        print("\n" + "="*60)
+        print("AGENT RESPONSE TO CUSTOMER:")
+        print("="*60)
+        print(final_state["final_response"])
+        print("="*60)
+        print(f"\n[Debug] Customer Type: {final_state.get('customer_type')}")
+        print(f"[Debug] Query used: {final_state.get('customer_query')}")
