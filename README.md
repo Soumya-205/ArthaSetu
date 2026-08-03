@@ -2,8 +2,6 @@
 
 **Agentic AI for Banking Customer Acquisition & Digital Adoption**
 
-> 🚧 Work in progress — an ongoing personal project exploring agentic AI in banking.
-
 ---
 
 ## Problem Statement
