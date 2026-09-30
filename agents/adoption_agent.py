@@ -30,6 +30,7 @@ from classify_logic import (
     resolve_conflict_with_llm,
     resolve_conflict_with_llm_adoption,  
 )
+from trace_logger import new_run, log_node  # graph-viz: execution trace logging
 
 # Constants
 DB_PATH = "data/customers.db"
@@ -48,6 +49,7 @@ class AdoptionState(TypedDict):
     account_type: str
     customer_found: bool
     customer_type: Optional[str]
+    classification_route: Optional[str]  # graph-viz: "rule" or "llm"
     customer_query: Optional[str]
     retrieved_context: Optional[str]
     final_response: Optional[str]
@@ -144,8 +146,10 @@ def node_classify(state: AdoptionState) -> dict:
 
     if tally["outcome"] == "clear":
         customer_type = tally["decision"]
+        route = "rule"
         print(f"  [node_classify] rule decision: Type {customer_type}")
     else:
+        route = "llm"
         print("  [node_classify] conflict — asking LLM to reason...")
         customer_type, reasoning = resolve_conflict_with_llm_adoption(
             state["profession"], state["monthly_income"], state["education"],
@@ -154,7 +158,7 @@ def node_classify(state: AdoptionState) -> dict:
         print(f"  [node_classify] LLM reasoning:\n{reasoning}\n")
         print(f"  [node_classify] LLM decision: Type {customer_type}")
 
-    return {"customer_type": customer_type}
+    return {"customer_type": customer_type, "classification_route": route}
 
 
 # ── Conditional edge router ───────────────────────────────────────────────────
@@ -284,9 +288,11 @@ if __name__ == "__main__":
     print("--- ArthaSetu Adoption Agent ---\n")
 
     final_state = {}
+    run_id = new_run()  # graph-viz: one id per conversation
     for chunk in graph.stream({}, stream_mode="updates"):
         for node_name, node_update in chunk.items():
             print(f"\n⟶ Node fired: [{node_name}]")
+            log_node(run_id, "adoption", node_name, node_update)  # graph-viz
             final_state.update(node_update)
 
     if final_state.get("customer_found"):

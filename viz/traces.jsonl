@@ -1,0 +1,223 @@
+{"run": "8964051f", "agent": "acquisition", "node": "profession", "t": 1790757104.096175, "meta": {}}
+{"run": "8964051f", "agent": "acquisition", "node": "income", "t": 1790757104.096175, "meta": {}}
+{"run": "8964051f", "agent": "acquisition", "node": "education", "t": 1790757104.096175, "meta": {}}
+{"run": "8964051f", "agent": "acquisition", "node": "classify", "t": 1790757104.1006308, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "8964051f", "agent": "acquisition", "node": "ask_interest", "t": 1790757104.102122, "meta": {}}
+{"run": "8964051f", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757104.1031272, "meta": {}}
+{"run": "8964051f", "agent": "acquisition", "node": "respond", "t": 1790757104.1041236, "meta": {}}
+{"run": "7d0e9769", "agent": "adoption", "node": "fetch_customer", "t": 1790757104.176022, "meta": {}}
+{"run": "7d0e9769", "agent": "adoption", "node": "classify", "t": 1790757104.1771693, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "7d0e9769", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757104.1776955, "meta": {}}
+{"run": "7d0e9769", "agent": "adoption", "node": "respond", "t": 1790757104.1782062, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "profession", "t": 1790757104.2439208, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "income", "t": 1790757104.2445242, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "education", "t": 1790757104.2445242, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "classify", "t": 1790757104.2450585, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "46798b29", "agent": "acquisition", "node": "ask_interest", "t": 1790757104.2455893, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757104.2455893, "meta": {}}
+{"run": "46798b29", "agent": "acquisition", "node": "respond", "t": 1790757104.246201, "meta": {}}
+{"run": "dfda92b0", "agent": "adoption", "node": "fetch_customer", "t": 1790757124.468528, "meta": {}}
+{"run": "dfda92b0", "agent": "adoption", "node": "classify", "t": 1790757124.468528, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "dfda92b0", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757124.4705427, "meta": {}}
+{"run": "dfda92b0", "agent": "adoption", "node": "respond", "t": 1790757124.4705427, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "profession", "t": 1790757171.43894, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "income", "t": 1790757171.4395108, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "education", "t": 1790757171.4406025, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "classify", "t": 1790757171.4416726, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "ask_interest", "t": 1790757171.442326, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757171.4428992, "meta": {}}
+{"run": "b0c43b6b", "agent": "acquisition", "node": "respond", "t": 1790757171.44391, "meta": {}}
+{"run": "e12c76d3", "agent": "adoption", "node": "fetch_customer", "t": 1790757196.0301857, "meta": {}}
+{"run": "e12c76d3", "agent": "adoption", "node": "classify", "t": 1790757196.0308166, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "e12c76d3", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757196.031866, "meta": {}}
+{"run": "e12c76d3", "agent": "adoption", "node": "respond", "t": 1790757196.0324426, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "profession", "t": 1790757196.1028798, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "income", "t": 1790757196.1034224, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "education", "t": 1790757196.103953, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "classify", "t": 1790757196.1050398, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "ask_interest", "t": 1790757196.1056087, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757196.1067066, "meta": {}}
+{"run": "f89d89e5", "agent": "acquisition", "node": "respond", "t": 1790757196.1067066, "meta": {}}
+{"run": "70c66b30", "agent": "adoption", "node": "fetch_customer", "t": 1790757196.172373, "meta": {}}
+{"run": "70c66b30", "agent": "adoption", "node": "classify", "t": 1790757196.172907, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "70c66b30", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757196.172907, "meta": {}}
+{"run": "70c66b30", "agent": "adoption", "node": "respond", "t": 1790757196.1737778, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "profession", "t": 1790757240.7199695, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "income", "t": 1790757240.721104, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "education", "t": 1790757240.7216787, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "classify", "t": 1790757240.7227607, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "e85859bf", "agent": "acquisition", "node": "ask_interest", "t": 1790757240.7233355, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757240.72388, "meta": {}}
+{"run": "e85859bf", "agent": "acquisition", "node": "respond", "t": 1790757240.7244463, "meta": {}}
+{"run": "70161d0a", "agent": "adoption", "node": "fetch_customer", "t": 1790757240.8009436, "meta": {}}
+{"run": "70161d0a", "agent": "adoption", "node": "classify", "t": 1790757240.8009436, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "70161d0a", "agent": "adoption", "node": "ask_interest", "t": 1790757240.8009436, "meta": {}}
+{"run": "70161d0a", "agent": "adoption", "node": "retrieve_type_b", "t": 1790757240.8009436, "meta": {}}
+{"run": "70161d0a", "agent": "adoption", "node": "respond", "t": 1790757240.8009436, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "profession", "t": 1790757240.8644254, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "income", "t": 1790757240.865566, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "education", "t": 1790757240.866678, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "classify", "t": 1790757240.8672333, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "ask_interest", "t": 1790757240.8683503, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757240.8683503, "meta": {}}
+{"run": "a1d6f6b4", "agent": "acquisition", "node": "respond", "t": 1790757240.8683503, "meta": {}}
+{"run": "0324c826", "agent": "adoption", "node": "fetch_customer", "t": 1790757240.941658, "meta": {}}
+{"run": "0324c826", "agent": "adoption", "node": "classify", "t": 1790757240.941658, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "0324c826", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757240.941658, "meta": {}}
+{"run": "0324c826", "agent": "adoption", "node": "respond", "t": 1790757240.941658, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "profession", "t": 1790757241.0198517, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "income", "t": 1790757241.020589, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "education", "t": 1790757241.020589, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "classify", "t": 1790757241.020589, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "ask_interest", "t": 1790757241.020589, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757241.020589, "meta": {}}
+{"run": "2eaf9e06", "agent": "acquisition", "node": "respond", "t": 1790757241.020589, "meta": {}}
+{"run": "140de550", "agent": "adoption", "node": "fetch_customer", "t": 1790757241.098012, "meta": {}}
+{"run": "140de550", "agent": "adoption", "node": "classify", "t": 1790757241.098012, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "140de550", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757241.098012, "meta": {}}
+{"run": "140de550", "agent": "adoption", "node": "respond", "t": 1790757241.1037924, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "profession", "t": 1790757241.176027, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "income", "t": 1790757241.1767194, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "education", "t": 1790757241.1779227, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "classify", "t": 1790757241.178538, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "ask_interest", "t": 1790757241.1796377, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757241.1796377, "meta": {}}
+{"run": "83cfefc0", "agent": "acquisition", "node": "respond", "t": 1790757241.1796377, "meta": {}}
+{"run": "3b78abae", "agent": "adoption", "node": "fetch_customer", "t": 1790757241.1861632, "meta": {}}
+{"run": "3b78abae", "agent": "adoption", "node": "not_found", "t": 1790757241.1875398, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "profession", "t": 1790757302.3980503, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "income", "t": 1790757302.3988147, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "education", "t": 1790757302.3999295, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "classify", "t": 1790757302.400509, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "d167c98c", "agent": "acquisition", "node": "ask_interest", "t": 1790757302.4010844, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757302.4016647, "meta": {}}
+{"run": "d167c98c", "agent": "acquisition", "node": "respond", "t": 1790757302.4016647, "meta": {}}
+{"run": "c26006ee", "agent": "adoption", "node": "fetch_customer", "t": 1790757302.4671772, "meta": {}}
+{"run": "c26006ee", "agent": "adoption", "node": "classify", "t": 1790757302.467904, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "c26006ee", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757302.4689655, "meta": {}}
+{"run": "c26006ee", "agent": "adoption", "node": "respond", "t": 1790757302.46954, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "profession", "t": 1790757302.5294273, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "income", "t": 1790757302.5300026, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "education", "t": 1790757302.5310178, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "classify", "t": 1790757302.5315666, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "6803df57", "agent": "acquisition", "node": "ask_interest", "t": 1790757302.53211, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757302.5326486, "meta": {}}
+{"run": "6803df57", "agent": "acquisition", "node": "respond", "t": 1790757302.533188, "meta": {}}
+{"run": "02da58de", "agent": "adoption", "node": "fetch_customer", "t": 1790757326.5447164, "meta": {}}
+{"run": "02da58de", "agent": "adoption", "node": "classify", "t": 1790757326.5447164, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "02da58de", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757326.5447164, "meta": {}}
+{"run": "02da58de", "agent": "adoption", "node": "respond", "t": 1790757326.5467215, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "profession", "t": 1790757364.499651, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "income", "t": 1790757364.499651, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "education", "t": 1790757364.499651, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "classify", "t": 1790757364.499651, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "ask_interest", "t": 1790757364.499651, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757364.499651, "meta": {}}
+{"run": "d1a42c03", "agent": "acquisition", "node": "respond", "t": 1790757364.499651, "meta": {}}
+{"run": "77f4c76c", "agent": "adoption", "node": "fetch_customer", "t": 1790757364.5735357, "meta": {}}
+{"run": "77f4c76c", "agent": "adoption", "node": "classify", "t": 1790757364.5735357, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "77f4c76c", "agent": "adoption", "node": "ask_interest", "t": 1790757364.5735357, "meta": {}}
+{"run": "77f4c76c", "agent": "adoption", "node": "retrieve_type_b", "t": 1790757364.5801783, "meta": {}}
+{"run": "77f4c76c", "agent": "adoption", "node": "respond", "t": 1790757364.5819767, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "profession", "t": 1790757364.6553242, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "income", "t": 1790757364.6553242, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "education", "t": 1790757364.6553242, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "classify", "t": 1790757364.6553242, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "277ac740", "agent": "acquisition", "node": "ask_interest", "t": 1790757364.6553242, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757364.664712, "meta": {}}
+{"run": "277ac740", "agent": "acquisition", "node": "respond", "t": 1790757364.664712, "meta": {}}
+{"run": "bace835a", "agent": "adoption", "node": "fetch_customer", "t": 1790757384.3926177, "meta": {}}
+{"run": "bace835a", "agent": "adoption", "node": "classify", "t": 1790757384.393148, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "bace835a", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757384.394382, "meta": {}}
+{"run": "bace835a", "agent": "adoption", "node": "respond", "t": 1790757384.3949597, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "profession", "t": 1790757384.4526038, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "income", "t": 1790757384.4526038, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "education", "t": 1790757384.4526038, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "classify", "t": 1790757384.457526, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "ask_interest", "t": 1790757384.457526, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757384.4585378, "meta": {}}
+{"run": "56ff47e7", "agent": "acquisition", "node": "respond", "t": 1790757384.4585378, "meta": {}}
+{"run": "67e96198", "agent": "adoption", "node": "fetch_customer", "t": 1790757407.863022, "meta": {}}
+{"run": "67e96198", "agent": "adoption", "node": "classify", "t": 1790757407.86359, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "67e96198", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757407.864101, "meta": {}}
+{"run": "67e96198", "agent": "adoption", "node": "respond", "t": 1790757407.8646357, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "profession", "t": 1790757407.9280198, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "income", "t": 1790757407.928586, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "education", "t": 1790757407.9297357, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "classify", "t": 1790757407.9303107, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "538c37d4", "agent": "acquisition", "node": "ask_interest", "t": 1790757407.9314456, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757407.9314456, "meta": {}}
+{"run": "538c37d4", "agent": "acquisition", "node": "respond", "t": 1790757407.9314456, "meta": {}}
+{"run": "732f78d4", "agent": "adoption", "node": "fetch_customer", "t": 1790757425.0224054, "meta": {}}
+{"run": "732f78d4", "agent": "adoption", "node": "classify", "t": 1790757425.0234063, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "732f78d4", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757425.0244043, "meta": {}}
+{"run": "732f78d4", "agent": "adoption", "node": "respond", "t": 1790757425.0254052, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "profession", "t": 1790757425.090109, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "income", "t": 1790757425.0906863, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "education", "t": 1790757425.0912504, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "classify", "t": 1790757425.0917864, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "ask_interest", "t": 1790757425.0923197, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757425.0934005, "meta": {}}
+{"run": "e1d7d7e4", "agent": "acquisition", "node": "respond", "t": 1790757425.0939417, "meta": {}}
+{"run": "b96994b7", "agent": "adoption", "node": "fetch_customer", "t": 1790757425.1563041, "meta": {}}
+{"run": "b96994b7", "agent": "adoption", "node": "classify", "t": 1790757425.1574428, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "b96994b7", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757425.1579924, "meta": {}}
+{"run": "b96994b7", "agent": "adoption", "node": "respond", "t": 1790757425.1585855, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "profession", "t": 1790757425.2243304, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "income", "t": 1790757425.2248766, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "education", "t": 1790757425.2248766, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "classify", "t": 1790757425.2248766, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "220f919c", "agent": "acquisition", "node": "ask_interest", "t": 1790757425.2269034, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757425.227917, "meta": {}}
+{"run": "220f919c", "agent": "acquisition", "node": "respond", "t": 1790757425.227917, "meta": {}}
+{"run": "bf5ad431", "agent": "adoption", "node": "fetch_customer", "t": 1790757425.2984104, "meta": {}}
+{"run": "bf5ad431", "agent": "adoption", "node": "classify", "t": 1790757425.2995136, "meta": {"customer_type": "A", "classification_route": "rule"}}
+{"run": "bf5ad431", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757425.3000586, "meta": {}}
+{"run": "bf5ad431", "agent": "adoption", "node": "respond", "t": 1790757425.3011317, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "profession", "t": 1790757425.36917, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "income", "t": 1790757425.36917, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "education", "t": 1790757425.369705, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "classify", "t": 1790757425.3702464, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "93765d1d", "agent": "acquisition", "node": "ask_interest", "t": 1790757425.3708153, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757425.3713865, "meta": {}}
+{"run": "93765d1d", "agent": "acquisition", "node": "respond", "t": 1790757425.3719797, "meta": {}}
+{"run": "dc5be39b", "agent": "adoption", "node": "fetch_customer", "t": 1790757442.8782175, "meta": {}}
+{"run": "dc5be39b", "agent": "adoption", "node": "classify", "t": 1790757442.8782175, "meta": {"customer_type": "A", "classification_route": "llm"}}
+{"run": "dc5be39b", "agent": "adoption", "node": "retrieve_type_a", "t": 1790757442.8782175, "meta": {}}
+{"run": "dc5be39b", "agent": "adoption", "node": "respond", "t": 1790757442.8782175, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "profession", "t": 1790757476.1957211, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "income", "t": 1790757476.1957211, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "education", "t": 1790757476.1957211, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "classify", "t": 1790757476.1957211, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "7cf95443", "agent": "acquisition", "node": "ask_interest", "t": 1790757476.1957211, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757476.1957211, "meta": {}}
+{"run": "7cf95443", "agent": "acquisition", "node": "respond", "t": 1790757476.1957211, "meta": {}}
+{"run": "8c19758d", "agent": "adoption", "node": "fetch_customer", "t": 1790757476.2694795, "meta": {}}
+{"run": "8c19758d", "agent": "adoption", "node": "classify", "t": 1790757476.2700548, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "8c19758d", "agent": "adoption", "node": "ask_interest", "t": 1790757476.2711728, "meta": {}}
+{"run": "8c19758d", "agent": "adoption", "node": "retrieve_type_b", "t": 1790757476.2717025, "meta": {}}
+{"run": "8c19758d", "agent": "adoption", "node": "respond", "t": 1790757476.272933, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "profession", "t": 1790757476.3356485, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "income", "t": 1790757476.336807, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "education", "t": 1790757476.3373783, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "classify", "t": 1790757476.3384318, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "d551765c", "agent": "acquisition", "node": "ask_interest", "t": 1790757476.3389409, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757476.339492, "meta": {}}
+{"run": "d551765c", "agent": "acquisition", "node": "respond", "t": 1790757476.340041, "meta": {}}
+{"run": "7d3de28d", "agent": "adoption", "node": "fetch_customer", "t": 1790757476.4010415, "meta": {}}
+{"run": "7d3de28d", "agent": "adoption", "node": "classify", "t": 1790757476.4010415, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "7d3de28d", "agent": "adoption", "node": "ask_interest", "t": 1790757476.4010415, "meta": {}}
+{"run": "7d3de28d", "agent": "adoption", "node": "retrieve_type_b", "t": 1790757476.4010415, "meta": {}}
+{"run": "7d3de28d", "agent": "adoption", "node": "respond", "t": 1790757476.4010415, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "profession", "t": 1790757507.0312095, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "income", "t": 1790757507.033216, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "education", "t": 1790757507.033216, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "classify", "t": 1790757507.033216, "meta": {"customer_type": "B", "classification_route": "llm"}}
+{"run": "85a50220", "agent": "acquisition", "node": "ask_interest", "t": 1790757507.033216, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "retrieve_type_b", "t": 1790757507.0352237, "meta": {}}
+{"run": "85a50220", "agent": "acquisition", "node": "respond", "t": 1790757507.0357287, "meta": {}}
+{"run": "5652a433", "agent": "adoption", "node": "fetch_customer", "t": 1790757507.1051848, "meta": {}}
+{"run": "5652a433", "agent": "adoption", "node": "classify", "t": 1790757507.1051848, "meta": {"customer_type": "B", "classification_route": "rule"}}
+{"run": "5652a433", "agent": "adoption", "node": "ask_interest", "t": 1790757507.1071908, "meta": {}}
+{"run": "5652a433", "agent": "adoption", "node": "retrieve_type_b", "t": 1790757507.1071908, "meta": {}}
+{"run": "5652a433", "agent": "adoption", "node": "respond", "t": 1790757507.1071908, "meta": {}}
